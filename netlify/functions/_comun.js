@@ -8,14 +8,22 @@ const TOKEN_TTL_MS = 1000 * 60 * 60 * 8; // 8 horas de sesion
 // Las funciones clasicas de Netlify (exports.handler) corren en "modo compatible con Lambda".
 // En ese modo, Netlify Blobs no se auto-configura solo: hay que conectar el contexto
 // manualmente pasandole el evento de la request antes de pedir un store.
+//
+// Nota sobre "consistency": se uso 'strong' al principio, pero ese modo requiere que el
+// entorno tenga configurada una propiedad interna llamada 'uncachedEdgeURL' que no esta
+// disponible en este sitio, y eso hacia fallar TODAS las lecturas con el error
+// "Netlify Blobs has failed to perform a read using strong consistency...".
+// Con 'eventual' (el modo por defecto y el que usa casi todo el mundo) los datos quedan
+// disponibles al instante para quien los escribe y se propagan al resto en <60s, que es
+// mas que suficiente para un catalogo que se actualiza a mano.
 function storeDatos(event) {
   connectLambda(event);
-  return getStore({ name: 'catalogo-datos', consistency: 'strong' });
+  return getStore({ name: 'catalogo-datos', consistency: 'eventual' });
 }
 
 function storeImagenes(event) {
   connectLambda(event);
-  return getStore({ name: 'catalogo-imagenes', consistency: 'strong' });
+  return getStore({ name: 'catalogo-imagenes', consistency: 'eventual' });
 }
 
 function firmarToken(payload) {
