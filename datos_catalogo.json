@@ -1,0 +1,422 @@
+[
+    {
+        "id": 1,
+        "nombre": "Boxer Happy Boy",
+        "portada": "",
+        "modelos": [
+            {
+                "precio": 0,
+                "imagen": ""
+            },
+            {
+                "precio": 0,
+                "imagen": ""
+            },
+            {
+                "precio": 0,
+                "imagen": ""
+            },
+            {
+                "precio": 0,
+                "imagen": ""
+            },
+            {
+                "precio": 0,
+                "imagen": ""
+            },
+            {
+                "precio": 0,
+                "imagen": ""
+            },
+            {
+                "precio": 0,
+                "imagen": ""
+            },
+            {
+                "precio": 0,
+                "imagen": ""
+            },
+            {
+                "precio": 0,
+                "imagen": ""
+            },
+            {
+                "precio": 0,
+                "imagen": ""
+            },
+            {
+                "precio": 0,
+                "imagen": ""
+            },
+            {
+                "precio": 0,
+                "imagen": ""
+            },
+            {
+                "precio": 0,
+                "imagen": ""
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "nombre": "Shorts de Jeans",
+        "portada": "",
+        "modelos": [
+            {
+                "precio": 0,
+                "imagen": ""
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "nombre": "Boxer  UOKIN",
+        "portada": "",
+        "modelos": [
+            {
+                "precio": 0,
+                "imagen": ""
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "nombre": "Interiores",
+        "portada": "",
+        "modelos": [
+            {
+                "precio": 0,
+                "imagen": ""
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "nombre": "Cacheteros",
+        "portada": "",
+        "modelos": [
+            {
+                "precio": 0,
+                "imagen": ""
+            },
+            {
+                "precio": 0,
+                "imagen": ""
+            },
+            {
+                "precio": 0,
+                "imagen": ""
+            },
+            {
+                "precio": 0,
+                "imagen": ""
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "nombre": "Panty",
+        "portada": "",
+        "modelos": [
+            {
+                "precio": 0,
+                "imagen": ""
+            },
+            {
+                "precio": 0,
+                "imagen": ""
+            },
+            {
+                "precio": 0,
+                "imagen": ""
+            },
+            {
+                "precio": 0,
+                "imagen": ""
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "nombre": "Toalla capucha",
+        "portada": "",
+        "modelos": [
+            {
+                "precio": 0,
+                "imagen": ""
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "nombre": "Faja",
+        "portada": "",
+        "modelos": [
+            {
+                "precio": 0,
+                "imagen": ""
+            },
+            {
+                "precio": 0,
+                "imagen": ""
+            },
+            {
+                "precio": 0,
+                "imagen": ""
+            },
+            {
+                "precio": 0,
+                "imagen": ""
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "nombre": "Shorts",
+        "portada": "",
+        "modelos": [
+            {
+                "precio": 0,
+                "imagen": ""
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "nombre": "Hilo sin costura",
+        "portada": "",
+        "modelos": [
+            {
+                "precio": 0,
+                "imagen": ""
+            }
+        ]
+    },
+    {
+        "id": 11,
+        "nombre": "Panty sin costura",
+        "portada": "",
+        "modelos": [
+            {
+                "precio": 0,
+                "imagen": ""
+            }
+        ]
+    },
+    {
+        "id": 12,
+        "nombre": "Hilo",
+        "portada": "",
+        "modelos": [
+            {
+                "precio": 0,
+                "imagen": ""
+            }
+        ]
+    },
+    {
+        "id": 13,
+        "nombre": "Medias Panty",
+        "portada": "",
+        "modelos": [
+            {
+                "precio": 0,
+                "imagen": ""
+            },
+            {
+                "precio": 0,
+                "imagen": ""
+            },
+            {
+                "precio": 0,
+                "imagen": ""
+            },
+            {
+                "precio": 0,
+                "imagen": ""
+            },
+            {
+                "precio": 0,
+                "imagen": ""
+            }
+        ]
+    },
+    {
+        "id": 14,
+        "nombre": "Vestido rejilla",
+        "portada": "",
+        "modelos": [
+            {
+                "precio": 0,
+                "imagen": ""
+            }
+        ]
+    },
+    {
+        "id": 15,
+        "nombre": "Lencería malla",
+        "portada": "",
+        "modelos": [
+            {
+                "precio": 0,
+                "imagen": ""
+            }
+        ]
+    },
+    {
+        "id": 16,
+        "nombre": "Medias para bebes",
+        "portada": "",
+        "modelos": [
+            {
+                "precio": 0,
+                "imagen": ""
+            }
+        ]
+    },
+    {
+        "id": 17,
+        "nombre": "Medias para niños",
+        "portada": "",
+        "modelos": [
+            {
+                "precio": 0,
+                "imagen": ""
+            }
+        ]
+    },
+    {
+        "id": 18,
+        "nombre": "Zapaticos para bebe",
+        "portada": "",
+        "modelos": [
+            {
+                "precio": 0,
+                "imagen": ""
+            }
+        ]
+    },
+    {
+        "id": 19,
+        "nombre": "Medias para niñas",
+        "portada": "",
+        "modelos": [
+            {
+                "precio": 0,
+                "imagen": ""
+            }
+        ]
+    },
+    {
+        "id": 20,
+        "nombre": "Medias para niño",
+        "portada": "",
+        "modelos": [
+            {
+                "precio": 0,
+                "imagen": ""
+            }
+        ]
+    },
+    {
+        "id": 21,
+        "nombre": "Medias Nike",
+        "portada": "",
+        "modelos": [
+            {
+                "precio": 0,
+                "imagen": ""
+            },
+            {
+                "precio": 0,
+                "imagen": ""
+            }
+        ]
+    },
+    {
+        "id": 22,
+        "nombre": "Medias  SPORT",
+        "portada": "",
+        "modelos": [
+            {
+                "precio": 0,
+                "imagen": ""
+            }
+        ]
+    },
+    {
+        "id": 23,
+        "nombre": "Medias TITAN",
+        "portada": "",
+        "modelos": [
+            {
+                "precio": 0,
+                "imagen": ""
+            }
+        ]
+    },
+    {
+        "id": 24,
+        "nombre": "GYMSHARK",
+        "portada": "",
+        "modelos": [
+            {
+                "precio": 0,
+                "imagen": ""
+            }
+        ]
+    },
+    {
+        "id": 25,
+        "nombre": "Medias ALO - B,N,G",
+        "portada": "",
+        "modelos": [
+            {
+                "precio": 0,
+                "imagen": ""
+            }
+        ]
+    },
+    {
+        "id": 26,
+        "nombre": "Medias ALO",
+        "portada": "",
+        "modelos": [
+            {
+                "precio": 0,
+                "imagen": ""
+            },
+            {
+                "precio": 0,
+                "imagen": ""
+            },
+            {
+                "precio": 0,
+                "imagen": ""
+            }
+        ]
+    },
+    {
+        "id": 27,
+        "nombre": "Medias QC",
+        "portada": "",
+        "modelos": [
+            {
+                "precio": 0,
+                "imagen": ""
+            }
+        ]
+    },
+    {
+        "id": 28,
+        "nombre": "Medias Leonfit",
+        "portada": "",
+        "modelos": [
+            {
+                "precio": 0,
+                "imagen": ""
+            }
+        ]
+    }
+]
