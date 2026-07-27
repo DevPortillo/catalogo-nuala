@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Administrar catalogo - Nuala Plaza Lago</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+    --accent: #c86fb8; --accent-strong: #ff8fb3; --success: #4bd6a5; --danger: #ff4b6a;
+    --bg: #fbf3f8; --surface: #ffffff; --surface-alt: #fbeef6; --border: #f0d9e8;
+    --text: #2b1a26; --text-muted: #8a7690;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; overflow-x: hidden; }
+.login-wrap { min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.login-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 28px 24px; width: 100%; max-width: 340px; }
+.login-card h1 { font-size: 18px; margin: 0 0 18px; }
+.login-card input { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--border); font-size: 16px; margin-bottom: 14px; }
+.login-card button { width: 100%; padding: 13px; border: none; border-radius: 10px; background: var(--accent); color: #fff; font-weight: 700; font-size: 15px; cursor: pointer; }
+.error-box { background: rgba(255,75,106,.12); color: var(--danger); border: 1px solid rgba(255,75,106,.3); border-radius: 10px; padding: 10px 12px; font-size: 13px; margin-bottom: 14px; }
+.success-box { background: rgba(75,214,165,.12); color: #1f9c74; border: 1px solid rgba(75,214,165,.3); border-radius: 10px; padding: 10px 12px; font-size: 13px; margin-bottom: 14px; }
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 14px 16px; background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; }
+.topbar h1 { font-size: 15px; margin: 0; }
+.topbar a { color: var(--text-muted); font-size: 13px; text-decoration: none; cursor: pointer; white-space: nowrap; padding: 6px 4px; }
+.contenido { padding: 14px; max-width: 1100px; margin: 0 auto; }
+.categoria-bloque { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 16px; overflow: hidden; }
+.categoria-header { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 14px; border-bottom: 1px solid var(--border); background: var(--surface-alt); }
+.form-renombrar { display: flex; flex-wrap: wrap; gap: 8px; flex: 1 1 200px; min-width: 0; }
+.form-renombrar input { flex: 1 1 140px; min-width: 0; padding: 10px; border-radius: 8px; border: 1px solid var(--border); font-size: 15px; font-weight: 600; }
+.form-renombrar button { padding: 10px 12px; border: none; border-radius: 8px; background: var(--accent); color: #fff; font-weight: 700; font-size: 12.5px; cursor: pointer; white-space: nowrap; flex-shrink: 0; }
+.btn-eliminar-categoria { padding: 10px 12px; border: 1px solid rgba(255,75,106,.3); border-radius: 8px; background: rgba(255,75,106,.12); color: var(--danger); font-weight: 700; font-size: 12.5px; cursor: pointer; white-space: nowrap; flex-shrink: 0; }
+.pie-categoria { padding: 10px 14px 16px; }
+.btn-agregar-modelo { padding: 10px 14px; border: 1px dashed var(--accent); border-radius: 8px; background: transparent; color: var(--accent); font-weight: 700; font-size: 12.5px; cursor: pointer; width: 100%; }
+.btn-eliminar-modelo { width: 100%; padding: 9px; border: none; border-radius: 7px; font-weight: 700; font-size: 11.5px; margin-bottom: 4px; cursor: pointer; background: rgba(255,75,106,.12); color: var(--danger); }
+.crear-categoria-bloque { background: var(--surface); border: 1px dashed var(--accent); border-radius: 16px; margin-bottom: 16px; padding: 16px; }
+.crear-categoria-bloque h2 { margin: 0 0 10px; font-size: 14.5px; }
+.crear-categoria-bloque form { display: flex; flex-wrap: wrap; gap: 8px; }
+.crear-categoria-bloque input { flex: 1 1 180px; min-width: 0; padding: 12px; border-radius: 8px; border: 1px solid var(--border); font-size: 15px; }
+.crear-categoria-bloque button { padding: 12px 16px; border: none; border-radius: 8px; background: var(--accent); color: #fff; font-weight: 700; font-size: 13.5px; cursor: pointer; white-space: nowrap; flex-shrink: 0; }
+.modelos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; padding: 14px; }
+.modelo-card { border: 1px solid var(--border); border-radius: 12px; padding: 10px; min-width: 0; }
+.modelo-card .miniatura { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; background: var(--surface-alt); display: block; margin-bottom: 8px; }
+.modelo-card .miniatura-vacia { width: 100%; aspect-ratio: 1/1; border-radius: 8px; background: var(--surface-alt); margin-bottom: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 11px; text-align: center; padding: 6px; }
+.modelo-card input[type="file"] { width: 100%; font-size: 11px; margin-bottom: 8px; }
+.modelo-card input[type="number"] { width: 100%; padding: 9px 8px; border-radius: 7px; border: 1px solid var(--border); font-size: 15px; margin-bottom: 6px; }
+.modelo-card .etiqueta-precio { display: block; font-size: 10.5px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .03em; margin-bottom: 3px; }
+.modelo-card button { width: 100%; padding: 9px; border: none; border-radius: 7px; font-weight: 700; font-size: 11.5px; margin-bottom: 6px; cursor: pointer; }
+.btn-subir { background: var(--accent); color: #fff; }
+.btn-precio { background: var(--surface-alt); color: var(--text); border: 1px solid var(--border) !important; }
+.btn-quitar { background: rgba(255,75,106,.12); color: var(--danger); }
+.cargando { padding: 40px 20px; text-align: center; color: var(--text-muted); }
+
+@media (min-width: 640px) {
+    .topbar { padding: 16px 24px; }
+    .topbar h1 { font-size: 16px; }
+    .contenido { padding: 24px; }
+    .categoria-header { padding: 14px 18px; flex-wrap: nowrap; }
+    .pie-categoria { padding: 12px 18px 18px; }
+    .crear-categoria-bloque { padding: 18px; }
+    .modelos-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; padding: 16px 18px; }
+}
+
+@media (min-width: 900px) {
+    .modelos-grid { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); }
+}
+</style>
+</head>
+<body>
+
+<div id="vista-login" class="login-wrap">
+    <div class="login-card">
+        <h1>Panel del catalogo</h1>
+        <div id="login-error" class="error-box" style="display:none;"></div>
+        <form id="form-login">
+            <input type="password" id="campo-clave" placeholder="Clave de acceso" required autofocus>
+            <button type="submit">Entrar</button>
+        </form>
+    </div>
+</div>
+
+<div id="vista-panel" style="display:none;">
+    <header class="topbar">
+        <h1>Fotos y precios del catalogo</h1>
+        <a id="btn-salir">Cerrar sesion</a>
+    </header>
+    <div class="contenido">
+        <div id="mensaje-global"></div>
+        <div class="crear-categoria-bloque">
+            <h2>Crear categoria nueva</h2>
+            <form id="form-crear-categoria">
+                <input type="text" id="campo-nueva-categoria" placeholder="Nombre de la categoria (ej: Boxer)" required>
+                <button type="submit">Crear categoria</button>
+            </form>
+        </div>
+        <div id="lista-categorias" class="cargando">Cargando catalogo...</div>
+    </div>
+</div>
+
+<script>
+const API = '/.netlify/functions';
+let token = sessionStorage.getItem('catalogo_admin_token') || null;
+
+const vistaLogin = document.getElementById('vista-login');
+const vistaPanel = document.getElementById('vista-panel');
+const formLogin = document.getElementById('form-login');
+const loginError = document.getElementById('login-error');
+const listaCategorias = document.getElementById('lista-categorias');
+const mensajeGlobal = document.getElementById('mensaje-global');
+const btnSalir = document.getElementById('btn-salir');
+
+function escapeHtml(texto) {
+    const div = document.createElement('div');
+    div.textContent = texto ?? '';
+    return div.innerHTML;
+}
+
+function mostrarMensaje(texto, tipo) {
+    mensajeGlobal.innerHTML = `<div class="${tipo === 'error' ? 'error-box' : 'success-box'}">${escapeHtml(texto)}</div>`;
+    setTimeout(() => { mensajeGlobal.innerHTML = ''; }, 4000);
+}
+
+function mostrarPanel() {
+    vistaLogin.style.display = 'none';
+    vistaPanel.style.display = 'block';
+    cargarDatos();
+}
+
+function mostrarLogin() {
+    vistaPanel.style.display = 'none';
+    vistaLogin.style.display = 'flex';
+}
+
+formLogin.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    loginError.style.display = 'none';
+    const clave = document.getElementById('campo-clave').value;
+    try {
+        const resp = await fetch(`${API}/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ clave }),
+        });
+        let data;
+        try {
+            data = await resp.json();
+        } catch {
+            loginError.textContent = `El servidor respondio algo inesperado (codigo ${resp.status}). Revisa los logs de la funcion "login" en Netlify.`;
+            loginError.style.display = 'block';
+            return;
+        }
+        if (!resp.ok) {
+            loginError.textContent = data.error || 'Clave incorrecta.';
+            loginError.style.display = 'block';
+            return;
+        }
+        token = data.token;
+        sessionStorage.setItem('catalogo_admin_token', token);
+        mostrarPanel();
+    } catch {
+        loginError.textContent = 'No se pudo conectar. Intenta de nuevo.';
+        loginError.style.display = 'block';
+    }
+});
+
+btnSalir.addEventListener('click', () => {
+    sessionStorage.removeItem('catalogo_admin_token');
+    token = null;
+    mostrarLogin();
+});
+
+async function cargarDatos() {
+    listaCategorias.innerHTML = '<div class="cargando">Cargando catalogo...</div>';
+    try {
+        const resp = await fetch(`${API}/get-datos`);
+        let datos;
+        try {
+            datos = await resp.json();
+        } catch {
+            throw new Error(`El servidor respondio algo que no es JSON (codigo ${resp.status}).`);
+        }
+        if (!resp.ok || !Array.isArray(datos)) {
+            const detalle = (datos && datos.error) ? datos.error : `codigo ${resp.status}`;
+            throw new Error(detalle);
+        }
+        renderizarCategorias(datos);
+    } catch (error) {
+        listaCategorias.innerHTML = `<div class="error-box">No se pudo cargar el catalogo. Detalle: ${escapeHtml(error.message)}</div>`;
+    }
+}
+
+function renderizarCategorias(datos) {
+    listaCategorias.className = '';
+    listaCategorias.innerHTML = datos.map((categoria) => `
+        <div class="categoria-bloque">
+            <div class="categoria-header">
+                <form class="form-renombrar" data-categoria="${categoria.id}">
+                    <input type="text" name="nombre" value="${escapeHtml(categoria.nombre)}" required>
+                    <button type="submit">Guardar nombre</button>
+                </form>
+                <button type="button" class="btn-eliminar-categoria" data-categoria="${categoria.id}">Eliminar categoria</button>
+            </div>
+            <div class="modelos-grid">
+                ${categoria.modelos.map((modelo, indice) => `
+                    <div class="modelo-card">
+                        ${modelo.imagen
+                            ? `<img class="miniatura" src="${escapeHtml(modelo.imagen)}" alt="">`
+                            : `<div class="miniatura-vacia">Sin foto</div>`
+                        }
+                        <form class="form-subir" data-categoria="${categoria.id}" data-indice="${indice}">
+                            <input type="file" name="imagen" accept=".jpg,.jpeg,.png,.webp" required>
+                            <button type="submit" class="btn-subir">Subir foto</button>
+                        </form>
+                        <form class="form-precio" data-categoria="${categoria.id}" data-indice="${indice}">
+                            <label class="etiqueta-precio">Precio a BCV</label>
+                            <input type="number" name="precio" step="0.01" min="0" value="${Number(modelo.precio) || 0}">
+                            <label class="etiqueta-precio">Oferta en divisas</label>
+                            <input type="number" name="precioDivisas" step="0.01" min="0" value="${Number(modelo.precioDivisas) || 0}">
+                            <button type="submit" class="btn-precio">Guardar precios</button>
+                        </form>
+                        ${modelo.imagen ? `
+                        <form class="form-quitar" data-categoria="${categoria.id}" data-indice="${indice}">
+                            <button type="submit" class="btn-quitar">Quitar foto</button>
+                        </form>` : ''}
+                        <button type="button" class="btn-eliminar-modelo" data-categoria="${categoria.id}" data-indice="${indice}">Eliminar variante</button>
+                    </div>
+                `).join('')}
+            </div>
+            <div class="pie-categoria">
+                <button type="button" class="btn-agregar-modelo" data-categoria="${categoria.id}">+ Agregar variante</button>
+            </div>
+        </div>
+    `).join('');
+
+    listaCategorias.querySelectorAll('.form-subir').forEach((form) => {
+        form.addEventListener('submit', subirFoto);
+    });
+    listaCategorias.querySelectorAll('.form-precio').forEach((form) => {
+        form.addEventListener('submit', guardarPrecio);
+    });
+    listaCategorias.querySelectorAll('.form-quitar').forEach((form) => {
+        form.addEventListener('submit', quitarFoto);
+    });
+    listaCategorias.querySelectorAll('.form-renombrar').forEach((form) => {
+        form.addEventListener('submit', renombrarCategoria);
+    });
+    listaCategorias.querySelectorAll('.btn-eliminar-categoria').forEach((boton) => {
+        boton.addEventListener('click', eliminarCategoria);
+    });
+    listaCategorias.querySelectorAll('.btn-agregar-modelo').forEach((boton) => {
+        boton.addEventListener('click', agregarModelo);
+    });
+    listaCategorias.querySelectorAll('.btn-eliminar-modelo').forEach((boton) => {
+        boton.addEventListener('click', eliminarModelo);
+    });
+}
+
+async function llamarActualizar(cuerpo) {
+    const resp = await fetch(`${API}/actualizar`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify(cuerpo),
+    });
+    let data;
+    try {
+        data = await resp.json();
+    } catch {
+        mostrarMensaje(`El servidor respondio algo inesperado (codigo ${resp.status}).`, 'error');
+        return null;
+    }
+    if (resp.status === 401) {
+        sessionStorage.removeItem('catalogo_admin_token');
+        token = null;
+        mostrarLogin();
+        return null;
+    }
+    if (!resp.ok) {
+        mostrarMensaje(data.error || 'Ocurrio un error.', 'error');
+        return null;
+    }
+    return data;
+}
+
+async function guardarPrecio(e) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const precio = form.querySelector('input[name="precio"]').value;
+    const precioDivisas = form.querySelector('input[name="precioDivisas"]').value;
+    const data = await llamarActualizar({
+        accion: 'precio',
+        categoria_id: form.dataset.categoria,
+        indice_modelo: form.dataset.indice,
+        precio,
+        precioDivisas,
+    });
+    if (data) {
+        mostrarMensaje(data.mensaje, 'success');
+        renderizarCategorias(data.datos);
+    }
+}
+
+async function quitarFoto(e) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = await llamarActualizar({
+        accion: 'quitar',
+        categoria_id: form.dataset.categoria,
+        indice_modelo: form.dataset.indice,
+    });
+    if (data) {
+        mostrarMensaje(data.mensaje, 'success');
+        renderizarCategorias(data.datos);
+    }
+}
+
+document.getElementById('form-crear-categoria').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const campo = document.getElementById('campo-nueva-categoria');
+    const nombre = campo.value.trim();
+    if (!nombre) return;
+    const data = await llamarActualizar({ accion: 'crear_categoria', nombre });
+    if (data) {
+        mostrarMensaje(data.mensaje, 'success');
+        campo.value = '';
+        renderizarCategorias(data.datos);
+    }
+});
+
+async function renombrarCategoria(e) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const nombre = form.querySelector('input[name="nombre"]').value.trim();
+    if (!nombre) return;
+    const data = await llamarActualizar({
+        accion: 'renombrar_categoria',
+        categoria_id: form.dataset.categoria,
+        nombre,
+    });
+    if (data) {
+        mostrarMensaje(data.mensaje, 'success');
+        renderizarCategorias(data.datos);
+    }
+}
+
+async function eliminarCategoria(e) {
+    const boton = e.currentTarget;
+    if (!confirm('Seguro que queres eliminar esta categoria completa? Se van a borrar todas sus variantes, fotos y precios.')) return;
+    const data = await llamarActualizar({
+        accion: 'eliminar_categoria',
+        categoria_id: boton.dataset.categoria,
+    });
+    if (data) {
+        mostrarMensaje(data.mensaje, 'success');
+        renderizarCategorias(data.datos);
+    }
+}
+
+async function agregarModelo(e) {
+    const boton = e.currentTarget;
+    const data = await llamarActualizar({
+        accion: 'agregar_modelo',
+        categoria_id: boton.dataset.categoria,
+    });
+    if (data) {
+        mostrarMensaje(data.mensaje, 'success');
+        renderizarCategorias(data.datos);
+    }
+}
+
+async function eliminarModelo(e) {
+    const boton = e.currentTarget;
+    if (!confirm('Seguro que queres eliminar esta variante? Se va a borrar su foto y precio.')) return;
+    const data = await llamarActualizar({
+        accion: 'eliminar_modelo',
+        categoria_id: boton.dataset.categoria,
+        indice_modelo: boton.dataset.indice,
+    });
+    if (data) {
+        mostrarMensaje(data.mensaje, 'success');
+        renderizarCategorias(data.datos);
+    }
+}
+
+async function subirFoto(e) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const archivo = form.querySelector('input[name="imagen"]').files[0];
+    if (!archivo) return;
+
+    const formData = new FormData();
+    formData.append('categoria_id', form.dataset.categoria);
+    formData.append('indice_modelo', form.dataset.indice);
+    formData.append('imagen', archivo);
+
+    try {
+        const resp = await fetch(`${API}/subir-foto`, {
+            method: 'POST',
+            headers: { Authorization: `Bearer ${token}` },
+            body: formData,
+        });
+        let data;
+        try {
+            data = await resp.json();
+        } catch {
+            mostrarMensaje(`El servidor respondio algo inesperado (codigo ${resp.status}).`, 'error');
+            return;
+        }
+        if (resp.status === 401) {
+            sessionStorage.removeItem('catalogo_admin_token');
+            token = null;
+            mostrarLogin();
+            return;
+        }
+        if (!resp.ok) {
+            mostrarMensaje(data.error || 'No se pudo subir la foto.', 'error');
+            return;
+        }
+        mostrarMensaje(data.mensaje, 'success');
+        renderizarCategorias(data.datos);
+    } catch {
+        mostrarMensaje('No se pudo subir la foto.', 'error');
+    }
+}
+
+// Al cargar la pagina: si hay token guardado, vamos directo al panel
+if (token) {
+    mostrarPanel();
+}
+</script>
+</body>
+</html>
